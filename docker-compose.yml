@@ -1,0 +1,27 @@
+name: elasticstack
+services:
+  elasticsearch:
+    image: ${REGISTRY_NAME}/${APP_NAME}:${APP_TAG}
+    container_name: ${APP_NAME}
+    network_mode: host
+    # Volumes
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    # Environment variables
+    environment:
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      ES_JAVA_OPTS: '-Xmx2g -Xms2g'
+    # Loggin settings
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "64m"
+        max-file: 16
+        compress: "true"
+    restart: always
+
+# Volumes
+volumes:
+  elasticsearch_data:
+    name: elasticsearch_data
+    driver: local
