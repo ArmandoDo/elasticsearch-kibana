@@ -1,16 +1,22 @@
 #!/bin/bash
 
-## This script builds the dockerize version of Elasticsearch in your
-## local environment. Modify the config files if it's necessary
-## 
+## This script install the dockerize version of Elasticsearch in your
+## local environment. Run the build script before start the installation
+##
+## Usage:
+## ./install-elasticsearch.sh
 
 ## Container registry
 export REGISTRY_NAME="development"
-export APP_NAME="elasticsearch"
-export APP_TAG="8.6.2"
+# Elasticsearch
+export ELASTICSEARCH_APP_NAME="elasticsearch"
+export ELASTICSEARCH_APP_TAG="8.6.2"
+# Kibana
+export KIBANA_APP_NAME="kibana"
+export KIBANA_APP_TAG="8.6.2"
 
 ## Volume info
-export VOLUME_NAME="elasticsearch_data"
+export ELASTICSEARCH_DATA_VOLUME_NAME="elasticsearch_data"
 
 ## Get the OS
 OS_TYPE=$(uname)
@@ -18,16 +24,15 @@ OS_TYPE=$(uname)
 ## Install docker image on linux
 install_on_linux() {
     source .env
-    create_volume
     stop_container
-    docker compose --file docker-compose.yml up --detach ${APP_NAME}
+    docker compose --file docker-compose.yml up --detach ${ELASTICSEARCH_APP_NAME}
 
 }
 
 ### Stop docker container
 stop_container() {
-    docker compose --file docker-compose.yml stop ${APP_NAME}
-    docker compose --file docker-compose.yml rm --force ${APP_NAME}
+    docker compose --file docker-compose.yml stop ${ELASTICSEARCH_APP_NAME}
+    docker compose --file docker-compose.yml rm --force ${ELASTICSEARCH_APP_NAME}
 }
 
 ## Main function
@@ -48,7 +53,7 @@ main() {
             ;;
     esac
 
-    echo "${APP_NAME} docker image deployed on host..."
+    echo "${ELASTICSEARCH_APP_NAME} docker image deployed on host..."
 }
 
 main

@@ -4,8 +4,12 @@
 #
 network.host: 0.0.0.0
 
+## Cluster config
+#
 discovery.type: single-node
 
+## Memory lock check
+#
 bootstrap.memory_lock: true
 
 ## X-Pack settings

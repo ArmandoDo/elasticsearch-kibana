@@ -1,4 +1,4 @@
-FROM elasticsearch:8.6.2
+FROM docker.elastic.co/elasticsearch/elasticsearch:8.6.2
 
 ### Set up Elasticsearch
 USER elasticsearch
