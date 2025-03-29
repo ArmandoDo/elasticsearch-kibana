@@ -23,7 +23,7 @@ OS_TYPE=$(uname)
 install_on_linux() {
     source .env
     stop_container
-    docker compose --file docker-compose.yml up ${KIBANA_APP_NAME}
+    docker compose --file docker-compose.yml up --detach ${KIBANA_APP_NAME}
 
 }
 
