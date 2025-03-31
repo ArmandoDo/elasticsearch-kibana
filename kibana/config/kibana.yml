@@ -12,4 +12,3 @@ xpack.monitoring.min_interval_seconds: 60
 ## X-Pack security credentials
 elasticsearch.username: "kibana_system"
 elasticsearch.password: ${KIBANA_USER_PASSWORD}
-# elasticsearch.serviceAccountToken: ${ELASTIC_TOKEN}

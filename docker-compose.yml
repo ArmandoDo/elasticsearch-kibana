@@ -32,9 +32,10 @@ services:
     container_name: ${KIBANA_APP_NAME}
     network_mode: host
     # Dependencies
-    # depends_on:
-    #   elasticsearch:
-    #     condition: service_healthy
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+        restart: true
     # Environment variables
     environment:
       KIBANA_USER_PASSWORD: ${KIBANA_USER_PASSWORD}
