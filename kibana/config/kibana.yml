@@ -5,7 +5,7 @@
 server.publicBaseUrl: http://0.0.0.0:5601/
 server.name: kibana
 server.host: 0.0.0.0
-elasticsearch.hosts: [ "http://localhost:9200" ]
+elasticsearch.hosts: [ "${ELASTIC_HOST}" ]
 monitoring.ui.container.elasticsearch.enabled: true
 xpack.monitoring.min_interval_seconds: 60
 

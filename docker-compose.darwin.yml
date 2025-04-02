@@ -36,7 +36,12 @@ services:
   kibana:
     image: ${REGISTRY_NAME}/${KIBANA_APP_NAME}:${KIBANA_APP_TAG}
     container_name: ${KIBANA_APP_NAME}
-    network_mode: host
+    # Network
+    networks:
+      - elasticstack_network
+    # Ports
+    ports:
+      - "5601:5601"
     # Dependencies
     depends_on:
       elasticsearch:
@@ -46,6 +51,7 @@ services:
     environment:
       KIBANA_USER_PASSWORD: ${KIBANA_USER_PASSWORD}
       ES_JAVA_OPTS: '-Xmx2g -Xms2g'
+      ELASTIC_HOST: "http://elasticsearch:9200"
     # Loggin settings
     logging:
       driver: "json-file"
