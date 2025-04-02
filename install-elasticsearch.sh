@@ -24,7 +24,6 @@ install_elasticsearch() {
     set_up_env_variable_file
     stop_container
     ${DOCKER_COMPOSE_COMMAND} --file ${DOCKER_COMPOSE_FILE} up --detach ${ELASTICSEARCH_APP_NAME}
-
 }
 
 # Set up the docker compose command available on the server
