@@ -5,7 +5,7 @@
 ## 
 ## Usage:
 ## ./build-kibana.sh
-set -ex
+# set -ex
 
 ## Container registry
 REGISTRY_NAME="development"
