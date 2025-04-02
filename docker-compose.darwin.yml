@@ -1,0 +1,74 @@
+name: elasticstack
+services:
+  ### Elasticsearch service
+  elasticsearch:
+    image: ${REGISTRY_NAME}/${ELASTICSEARCH_APP_NAME}:${ELASTICSEARCH_APP_TAG}
+    container_name: ${ELASTICSEARCH_APP_NAME}
+    # Network
+    networks:
+      - elasticstack_network
+    # Ports
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    # Volumes
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    # Environment variables
+    environment:
+      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+      ES_JAVA_OPTS: '-Xmx2g -Xms2g'
+    # Loggin settings
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "64m"
+        max-file: 16
+        compress: "true"
+    restart: always
+    # Check status of service
+    healthcheck:
+      test: curl http://elastic:${ELASTIC_PASSWORD}@localhost:9200/_cluster/health?wait_for_status=green
+      retries: 6
+      interval: 20s
+      timeout: 10s
+  ### Kibana service
+  kibana:
+    image: ${REGISTRY_NAME}/${KIBANA_APP_NAME}:${KIBANA_APP_TAG}
+    container_name: ${KIBANA_APP_NAME}
+    network_mode: host
+    # Dependencies
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+        restart: true
+    # Environment variables
+    environment:
+      KIBANA_USER_PASSWORD: ${KIBANA_USER_PASSWORD}
+      ES_JAVA_OPTS: '-Xmx2g -Xms2g'
+    # Loggin settings
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "64m"
+        max-file: 16
+        compress: "true"
+    restart: always
+    # Check status of service
+    healthcheck:
+      test: curl http://localhost:5601/api/status
+      retries: 6
+      interval: 20s
+      timeout: 10s
+
+# Volumes
+volumes:
+  elasticsearch_data:
+    name: elasticsearch_data
+    driver: local
+
+# Networks
+networks:
+  elasticstack_network:
+    name: elasticsearch_network
+    driver: bridge
