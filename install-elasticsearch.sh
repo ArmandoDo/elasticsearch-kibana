@@ -16,9 +16,6 @@ export ELASTICSEARCH_APP_TAG="8.6.2"
 export KIBANA_APP_NAME="kibana"
 export KIBANA_APP_TAG="8.6.2"
 
-## Volume info
-export ELASTICSEARCH_DATA_VOLUME_NAME="elasticsearch_data"
-
 ## Get the OS
 OS_TYPE=$(uname)
 
