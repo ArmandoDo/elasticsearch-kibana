@@ -5,7 +5,10 @@
 ## ./set-up-kibana-user.sh
 #
 
-source .env
+if ! source .env; then
+    echo "Missing .env file with the environment variables. Please create the .env file"
+    exit 1
+fi
 
 echo "Setting password for the Kibana user"
 
