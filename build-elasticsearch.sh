@@ -26,7 +26,7 @@ containerize_on_darwin() {
     # Delete none images generated in the build process
     delete_none_images
 
-    echo "Docker image building has completed successfully for ${APP_NAME}"
+    echo "Docker image building has completed successfully in ${REGISTRY_NAME}/${APP_NAME}:${APP_TAG}"
 }
 
 ## Build docker image on Ubuntu Linux
@@ -40,7 +40,7 @@ containerize_on_linux() {
     # Delete none images generated in the build process
     delete_none_images
     
-    echo "Docker image building has completed successfully for ${APP_NAME}"
+    echo "Docker image building has completed successfully in ${REGISTRY_NAME}/${APP_NAME}:${APP_TAG}"
 }
 
 # Delete none images on container repository

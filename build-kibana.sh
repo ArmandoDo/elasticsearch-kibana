@@ -24,7 +24,7 @@ containerize_on_darwin (){
         -f ./kibana/Dockerfile ./kibana
     
     delete_none_images
-    echo "Docker image building has completed successfully for ${KIBANA_APP_NAME}"
+    echo "Docker image building has completed successfully in ${REGISTRY_NAME}/${KIBANA_APP_NAME}:${KIBANA_APP_TAG}"
 }
 
 ## Build docker image on Ubuntu Linux
@@ -36,7 +36,7 @@ containerize_on_linux (){
         -f ./kibana/Dockerfile ./kibana
     
     delete_none_images
-    echo "Docker image building has completed successfully for ${KIBANA_APP_NAME}"
+    echo "Docker image building has completed successfully in ${REGISTRY_NAME}/${KIBANA_APP_NAME}:${KIBANA_APP_TAG}"
 }
 
 # Delete none images on container repository
