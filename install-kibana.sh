@@ -6,6 +6,7 @@
 ##
 ## Usage:
 ## ./install-kibana.sh
+# set -ex
 
 ## Container registry
 export REGISTRY_NAME="development"
@@ -85,13 +86,15 @@ main() {
             install_kibana
             ;;
         "Linux")
-            install_on_linux
-            ;;
-        *)
             export DOCKER_COMPOSE_FILE="docker-compose.ubuntu.yml"
             verify_docker_engine
             set_up_docker_compose_command
             install_kibana
+            ;;
+        *)
+            echo "System isn't supported by this script: ${OS_TYPE}"
+            echo "Please contact to the support team."
+            exit 1
             ;;
     esac
 
