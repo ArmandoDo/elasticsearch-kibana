@@ -35,7 +35,7 @@ services:
     depends_on:
       elasticsearch:
         condition: service_healthy
-        restart: true
+        # restart: true
     # Environment variables
     environment:
       KIBANA_USER_PASSWORD: ${KIBANA_USER_PASSWORD}
